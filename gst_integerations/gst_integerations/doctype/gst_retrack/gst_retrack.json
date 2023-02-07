@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "GST-DT-.#####",
+ "autoname": "format:GST-{customer}-{gstin}",
  "creation": "2023-01-12 16:33:50.423267",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -210,11 +210,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-02-03 10:17:04.035229",
+ "modified": "2023-02-07 15:31:18.361526",
  "modified_by": "Administrator",
  "module": "Gst Integerations",
  "name": "GST Retrack",
- "naming_rule": "Autoincrement",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
