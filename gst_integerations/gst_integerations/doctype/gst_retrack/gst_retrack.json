@@ -1,0 +1,236 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "GST-DT-.#####",
+ "creation": "2023-01-12 16:33:50.423267",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "gstin",
+  "get_customer_details",
+  "address_tab",
+  "primary_address",
+  "permanent_address",
+  "column_break_6",
+  "secondary_address",
+  "address",
+  "section_break_8",
+  "trade_name",
+  "state_code",
+  "legal_name_of_business",
+  "state_jurisdiction",
+  "taxpayer_type",
+  "nature_of_business",
+  "date_of_cancellation",
+  "column_break_16",
+  "last_updated_date",
+  "date_of_registration",
+  "constution_of_business",
+  "gstin_status",
+  "centre_jurisdiction_code",
+  "centre_jurisdiction",
+  "gst_details_tab",
+  "year",
+  "year_entry",
+  "get_retrack_details",
+  "retrack_items"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "gstin",
+   "fieldtype": "Data",
+   "label": "GSTIN"
+  },
+  {
+   "fieldname": "get_customer_details",
+   "fieldtype": "Button",
+   "label": "Get Customer Details"
+  },
+  {
+   "fieldname": "address_tab",
+   "fieldtype": "Section Break",
+   "label": "Address"
+  },
+  {
+   "fieldname": "permanent_address",
+   "fieldtype": "Small Text",
+   "label": "Permanent Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "trade_name",
+   "fieldtype": "Data",
+   "label": "Trade Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "state_code",
+   "fieldtype": "Data",
+   "label": "State Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "legal_name_of_business",
+   "fieldtype": "Data",
+   "label": "Legal Name of Business",
+   "read_only": 1
+  },
+  {
+   "fieldname": "state_jurisdiction",
+   "fieldtype": "Data",
+   "label": "State Jurisdiction",
+   "read_only": 1
+  },
+  {
+   "fieldname": "taxpayer_type",
+   "fieldtype": "Data",
+   "label": "Taxpayer Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nature_of_business",
+   "fieldtype": "Small Text",
+   "label": "Nature Of Business",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_updated_date",
+   "fieldtype": "Data",
+   "label": "Last Updated Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "date_of_registration",
+   "fieldtype": "Data",
+   "label": "Date of Registration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "constution_of_business",
+   "fieldtype": "Data",
+   "label": "Constution of Business",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gstin_status",
+   "fieldtype": "Data",
+   "label": "GSTIN Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "centre_jurisdiction_code",
+   "fieldtype": "Data",
+   "label": "Centre Jurisdiction Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "centre_jurisdiction",
+   "fieldtype": "Data",
+   "label": "Centre Jurisdiction",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gst_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "GST Retrack Details"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "fieldname": "retrack_items",
+   "fieldtype": "Table",
+   "label": "Retrack Items",
+   "options": "GST Retrack Item"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break",
+   "label": "General Gst Details"
+  },
+  {
+   "fieldname": "get_retrack_details",
+   "fieldtype": "Button",
+   "hidden": 1,
+   "label": "Get Retrack Details"
+  },
+  {
+   "fieldname": "date_of_cancellation",
+   "fieldtype": "Data",
+   "label": "Date Of Cancellation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "year_entry",
+   "fieldtype": "Table",
+   "label": "Year Entry",
+   "options": "Year"
+  },
+  {
+   "fieldname": "primary_address",
+   "fieldtype": "Link",
+   "label": "Primary Address",
+   "options": "Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "secondary_address",
+   "fieldtype": "Link",
+   "label": "Secondary Address",
+   "options": "Address",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-02-03 10:17:04.035229",
+ "modified_by": "Administrator",
+ "module": "Gst Integerations",
+ "name": "GST Retrack",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

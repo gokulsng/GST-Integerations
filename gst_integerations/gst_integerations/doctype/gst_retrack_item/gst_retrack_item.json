@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-01-12 16:31:26.841107",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fiscal_year",
+  "arn_number",
+  "mode_of_filing",
+  "date_of_filing",
+  "return_type",
+  "status",
+  "tax_period",
+  "validity"
+ ],
+ "fields": [
+  {
+   "fieldname": "arn_number",
+   "fieldtype": "Data",
+   "label": "ARN Number"
+  },
+  {
+   "fieldname": "mode_of_filing",
+   "fieldtype": "Data",
+   "label": "Mode of Filing"
+  },
+  {
+   "fieldname": "date_of_filing",
+   "fieldtype": "Date",
+   "label": "Date of Filing"
+  },
+  {
+   "fieldname": "return_type",
+   "fieldtype": "Data",
+   "label": "Return Type"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "tax_period",
+   "fieldtype": "Data",
+   "label": "Tax Period"
+  },
+  {
+   "fieldname": "validity",
+   "fieldtype": "Data",
+   "label": "Validity"
+  },
+  {
+   "fieldname": "fiscal_year",
+   "fieldtype": "Data",
+   "label": "Fiscal Year"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-02-02 12:00:08.630103",
+ "modified_by": "Administrator",
+ "module": "Gst Integerations",
+ "name": "GST Retrack Item",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

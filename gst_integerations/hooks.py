@@ -102,13 +102,19 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
+doc_events = {
 #	"*": {
 #		"on_update": "method",
 #		"on_cancel": "method",
 #		"on_trash": "method"
 #	}
-# }
+	"Customer":{
+		"on_update":"gst_integerations.api.get_gst_details"
+	},
+#	"GST Retrack":{
+#		"validate":"gst_integerations.api.get_retrack_details"
+#	}
+}
 
 # Scheduled Tasks
 # ---------------

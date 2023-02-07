@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-02-02 12:04:23.584529",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "year",
+  "get_retrack_items",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "year",
+   "fieldtype": "Link",
+   "label": "Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "fieldname": "get_retrack_items",
+   "fieldtype": "Button",
+   "label": "Get Retrack Items"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-02-03 10:54:59.575671",
+ "modified_by": "Administrator",
+ "module": "Gst Integerations",
+ "name": "Year",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
