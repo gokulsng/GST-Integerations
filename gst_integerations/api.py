@@ -1,3 +1,4 @@
+
 import frappe
 import pdfkit
 import os
@@ -120,9 +121,9 @@ def get_gst_details(self,method):
 
 @frappe.whitelist(allow_guest=True)
 def get_retrack_details(gstin,year):
-	retrack = frappe.db.get_value("GST Retrack",{"gstin":gstin},"name")
-	if retrack:
-		frappe.throw(("GST Retrack already created for GSTIN- {0} : {1}").format(gstin,retrack))
+#	retrack = frappe.db.get_value("GST Retrack",{"gstin":gstin},"name")
+#	if retrack:
+#		frappe.throw(("GST Retrack already created for GSTIN- {0} : {1}").format(gstin,retrack))
 	date = year[0:6]+year[8:10]
 #	frappe.errprint(date)
 #	frappe.errprint(gstin)
@@ -182,9 +183,9 @@ def get_retrack_details(gstin,year):
 @frappe.whitelist(allow_guest=True)
 def get_customer_gstin(gstin,name,primary_address=None,secondary_adr=None):
 #	frappe.errprint(gstin)
-	retrack = frappe.db.get_value("GST Retrack",{"gstin":gstin},"name")
-	if retrack:
-		frappe.throw(("GST Retrack already created for GSTIN- {0} : {1}").format(gstin,retrack))
+#	retrack = frappe.db.get_value("GST Retrack",{"gstin":gstin},"name")
+#	if retrack:
+#		frappe.throw(("GST Retrack already created for GSTIN- {0} : {1}").format(gstin,retrack))
 	url = 'https://gsp.adaequare.com/enriched/commonapi/search?action=TP&gstin=' + gstin
 
 	payload={}
@@ -250,34 +251,36 @@ def get_customer_gstin(gstin,name,primary_address=None,secondary_adr=None):
 				ad_doc2 = frappe.new_doc("Address")
 			#	if txt["result"]["pradr"]['addr']['bnm']:
 			#		ad_doc.address_title = txt["result"]["pradr"]['addr']['bnm']
-				adres=""
-				if(txt["result"]["adadr"]["addr"]["bno"]!=""):
-					adres=txt["result"]["adadr"]["addr"]["bno"]+","
-				if(txt["result"]["adadr"]["addr"]["flno"]!=""):
-					adres=adress+txt["result"]["adadr"]["addr"]["flno"]+","
-				if(txt["result"]["adadr"]["addr"]["bnm"]!=""):
-					adres=adress+txt["result"]["adadr"]["addr"]["bnm"]+","
-				adress1=""
-				if(txt["result"]["adadr"]["addr"]["st"]!=""):
-					adres=adress+txt["result"]["adadr"]["addr"]["st"]+","   
-				ad_doc2.address_line1=adres
-				if(txt["result"]["adadr"]["addr"]["loc"]!=""):
-					adress1=adress1+txt["result"]["adadr"]["addr"]["loc"]
-				ad_doc2.address_line2=adress1
-				if(txt["result"]["adadr"]["addr"]["dst"]!=""):
-					ad_doc2.city=txt["result"]["adadr"]["addr"]["dst"]
-				if(txt["result"]["adadr"]["addr"]["lg"]!=""):
-					ad_doc2.longitude=txt["result"]["adadr"]["addr"]["lg"]
-				if(txt["result"]["adadr"]["addr"]["lt"]!=""):
-					ad_doc2.latitude=txt["result"]["adadr"]["addr"]["lt"]
-				if(txt["result"]["adadr"]["addr"]["pncd"]!=""):
-					ad_doc2.pincode=txt["result"]["adadr"]["addr"]["pncd"]
-				ad_doc2.gstin=txt["result"]["gstin"]
-				if(txt["result"]["adadr"]["addr"]["stcd"]!=""):
-					ad_doc2.gst_state=txt["result"]["adadr"]["addr"]["stcd"]
-				ad_doc2.append("links",{"link_doctype":"Customer","link_name":name})
-				ad_doc2.save()
-				frappe.errprint(ad_doc2.name)
+				for row in txt["result"]["adadr"]:
+					adres=""
+					adress = ""
+					if(row["addr"]["bno"]!=""):
+						adres=row["addr"]["bno"]+","
+					if(row["addr"]["flno"]!=""):
+						adres=adress+row["addr"]["flno"]+","
+					if(row["addr"]["bnm"]!=""):
+						adres=adress+row["addr"]["bnm"]+","
+					adress1=""
+					if(row["addr"]["st"]!=""):
+						adres=adress+row["addr"]["st"]+","   
+					ad_doc2.address_line1=adres
+					if(row["addr"]["loc"]!=""):
+						adress1=adress1+row["addr"]["loc"]
+					ad_doc2.address_line2=adress1
+					if(row["addr"]["dst"]!=""):
+						ad_doc2.city=row["addr"]["dst"]
+					if(row["addr"]["lg"]!=""):
+						ad_doc2.longitude=row["addr"]["lg"]
+					if(row["addr"]["lt"]!=""):
+						ad_doc2.latitude=row["addr"]["lt"]
+					if(row["addr"]["pncd"]!=""):
+						ad_doc2.pincode=row["addr"]["pncd"]
+					ad_doc2.gstin=txt["result"]["gstin"]
+					if(row["addr"]["stcd"]!=""):
+						ad_doc2.gst_state=row["addr"]["stcd"]
+					ad_doc2.append("links",{"link_doctype":"Customer","link_name":name})
+					ad_doc2.save()
+					frappe.errprint(ad_doc2.name)
 
 		adress=""
 		addict = {}
@@ -305,24 +308,26 @@ def get_customer_gstin(gstin,name,primary_address=None,secondary_adr=None):
 
 
 		if txt["result"]["adadr"]:
-			adress1=""
-			if txt["result"]["tradeNam"]:
-				adress1 = txt["result"]["tradeNam"]+","+"\n"
-			if(txt["result"]["adadr"]["addr"]["bno"]!=""):
-				adress1= adress+txt["result"]["adadr"]["addr"]["bno"]+","
-			if(txt["result"]["adadr"]["addr"]["flno"]!=""):
-				adress1=adress1+txt["result"]["adadr"]["addr"]["flno"]+","
-			if(txt["result"]["adadr"]["addr"]["bnm"]!=""):
-				adress1=adress1+txt["result"]["adadr"]["addr"]["bnm"]+","
-			if(txt["result"]["adadr"]["addr"]["st"]!=""):
-				adress1=adress1+txt["result"]["adadr"]["addr"]["st"]+","+"\n"
-			if(txt["result"]["adadr"]["addr"]["loc"]!=""):
-				adress1 = adress1 + txt["result"]["adadr"]["addr"]["loc"]+","+"\n"
-			if(txt["result"]["adadr"]["addr"]["dst"]!=""):
-				adress1 = adress1 + txt["result"]["adadr"]["addr"]["dst"]+","+"\n"
-			adress1 = adress1 + txt["result"]["adadr"]["addr"]["stcd"]+"-"      
-			adress1 = adress1 + txt["result"]["adadr"]["addr"]["pncd"]+"."
-			addict.update({"addres":adress1})
+			for row in txt["result"]["adadr"]:
+				adress1=""
+				adress = ""
+				if txt["result"]["tradeNam"]:
+					adress1 = txt["result"]["tradeNam"]+","+"\n"
+				if(row["addr"]["bno"]!=""):
+					adress1= adress+row["addr"]["bno"]+","
+				if(row["addr"]["flno"]!=""):
+					adress1=adress1 + row["addr"]["flno"]+","
+				if(row["addr"]["bnm"]!=""):
+					adress1=adress1 + row["addr"]["bnm"]+","
+				if(row["addr"]["st"]!=""):
+					adress1=adress1 + row["addr"]["st"]+","+"\n"
+				if(row["addr"]["loc"]!=""):
+					adress1 = adress1 + row["addr"]["loc"]+","+"\n"
+				if(row["addr"]["dst"]!=""):
+					adress1 = adress1 + row["addr"]["dst"]+","+"\n"
+				adress1 = adress1 + row["addr"]["stcd"]+"-"      
+				adress1 = adress1 + row["addr"]["pncd"]+"."
+				addict.update({"addres":adress1})
 
 		if ad_doc:
 			pri_addr = ad_doc.name

@@ -63,10 +63,12 @@ frappe.ui.form.on('GST Retrack', {
 frappe.ui.form.on('Year', {
 	get_retrack_items: function(frm,cdt,cdn) {
 		console.log("1")
+		debugger;
 		var ch = 0;
 		const row = locals[cdt][cdn];
 		if (frm.doc.retrack_items)
 		{
+			console.log(frm.doc.retrack_items)
 			console.log(frm.doc.retrack_items[0].fiscal_year)
 			for (var i=0; i<frm.doc.retrack_items.length;i++)
 			{
