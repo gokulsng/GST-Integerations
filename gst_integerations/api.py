@@ -41,10 +41,11 @@ def get_token():
 
 
 @frappe.whitelist(allow_guest=True)
-def get_gst_details(self,method):
-	if(self.adress_gstin_check==1):
+def get_gst_details(gstin,adress_gstin_check,name):
+	frappe.errprint(gstin)
+	if(adress_gstin_check == 1):
 		return
-	url = 'https://gsp.adaequare.com/enriched/commonapi/search?action=TP&gstin=' + self.tax_id
+	url = 'https://gsp.adaequare.com/enriched/commonapi/search?action=TP&gstin=' + gstin
 	token = get_token()
 	payload={}
 	headers = {
@@ -61,8 +62,9 @@ def get_gst_details(self,method):
 	elif(txt["message"]!="Search taxpayer is completed successfully"):
 		frappe.throw("Please Try After Sometime Error:"+txt["message"])
 
-	frappe.db.set_value("Customer",self.name,"alias",txt["result"]["tradeNam"])
-	frappe.db.set_value("Customer",self.name,"adress_gstin_check",1)
+	frappe.db.set_value("Customer",name,"tax_id",gstin)
+	frappe.db.set_value("Customer",name,"alias",txt["result"]["tradeNam"])
+	frappe.db.set_value("Customer",name,"adress_gstin_check",1)
 	adress_doc=frappe.new_doc("Address")
 	adress=""
 	if(txt["result"]["pradr"]["addr"]["bno"]!=""):
@@ -83,7 +85,7 @@ def get_gst_details(self,method):
 	adress_doc.pincode=txt["result"]["pradr"]["addr"]["pncd"]
 	adress_doc.gstin=txt["result"]["gstin"]
 	adress_doc.gst_state=txt["result"]["pradr"]["addr"]["stcd"]
-	adress_doc.append("links",{"link_doctype":"Customer","link_name":self.name})
+	adress_doc.append("links",{"link_doctype":"Customer","link_name":name})
 	adress_doc.save()
 
 #	frappe.errprint(txt["result"])
@@ -115,8 +117,10 @@ def get_gst_details(self,method):
 			adress_doc.pincode=row["addr"]["pncd"]
 			adress_doc.gstin=txt["result"]["gstin"]
 			adress_doc.gst_state=row["addr"]["stcd"]
-			adress_doc.append("links",{"link_doctype":"Customer","link_name":self.name})
+			adress_doc.append("links",{"link_doctype":"Customer","link_name":name})
 			adress_doc.save()
+	frappe.db.commit()
+	return 0
 
 
 @frappe.whitelist(allow_guest=True)
@@ -206,8 +210,8 @@ def get_customer_gstin(gstin,name,primary_address=None,secondary_adr=None):
 		frappe.throw("Please Try After Sometime Error:"+txt["message"])
 
 #	frappe.errprint(txt["result"])
-#	frappe.db.set_value("Customer",self.name,"alias",txt["result"]["tradeNam"])
-#	frappe.db.set_value("Customer",self.name,"adress_gstin_check",1)
+#	frappe.db.set_value("Customer",name,"alias",txt["result"]["tradeNam"])
+#	frappe.db.set_value("Customer",name,"adress_gstin_check",1)
 	if txt["result"]:
 		ad_doc = ""
 		if txt['result']['pradr']:
